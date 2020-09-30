@@ -21,22 +21,24 @@ let menuItems = [
   The 'menuMaker' takes an array of menu items as its only argument. 
 */
 function menuMaker(menuArray) {
+  const menu = document.createElement('div');
+  const unorderedListDiv = document.createElement('ul');  
 
+  menu.classList.add('menu');
 
 /*  
   Step 2: Inside the function, iterate over the array creating a list item <li> element for each item in the array.
   Add those items to the <ul> 
 */
 
-  const unorderedListDiv = document.createElement('div');  
+
 
   menuArray.forEach(element => {
     const newListItem = document.createElement('li');
     newListItem.textContent = element;
     unorderedListDiv.appendChild(newListItem);
-    // console.log(newListItem);
   });
-
+  menu.appendChild(unorderedListDiv);
 /*  
   Step 3: Still inside your function, select from the DOM the menu button (the element with a class of 'menu-button'). 
 */
@@ -47,17 +49,18 @@ function menuMaker(menuArray) {
   Step 4: Add a click event listener to the menu button. When clicked it should toggle the class 'menu--open' on div.menu (your div with a 'menu' class). 
 */
   menuButton.addEventListener('click', function(event){
-    unorderedListDiv.classList.toggle('menu--open')
+    menu.classList.toggle('menu--open')
   })
-// BREAK POINT - I REALIZED I WAS WORKING ON THE WRONG FILE. UNORDERED LISTDIV HERE IS WEIRD. SHOULD BE SOME DIV WITH MENU CLASS. REVISIT.
 
 /*  
   Step 5: Don't forget to return your div.menu. 
 */
-
-return unorderedListDiv;
+  return menu;
 } // Closes menuMaker()
-menuMaker(menuItems);
+
 /*  
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+
+const header = document.querySelector('.header');
+header.appendChild(menuMaker(menuItems));
