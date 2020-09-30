@@ -86,6 +86,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  }, 
+  {
+    title: 'Sterling\'s Treatise on Treats',
+    date: 'September 30, 2020',
+    firstParagraph: `woof woof woof woof woof`,
+    secondParagraph: `bark bark give me dinner`,
+    thirdParagraph: `ruff ruff where's my treat, I'm very good`
   }
 ];
 
@@ -102,15 +109,67 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
 
+const articlesSection = document.querySelector('.articles'); // Make a variable for the larger Articles section in global scope
+
+function articleMaker(articleObject) {
+
+  // Set up elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleP1 = document.createElement('p');
+  const articleP2 = document.createElement('p');
+  const articleP3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  articleDate.classList.add('date')
+  expandButton.classList.add('expandButton');
+
+  articleTitle.textContent = articleObject.title;
+  articleDate.textContent = articleObject.date;
+  articleP1.textContent = articleObject.firstParagraph;
+  articleP2.textContent = articleObject.secondParagraph;
+  articleP3.textContent = articleObject.thirdParagraph;
+  expandButton.textContent = '+';
+
+  articlesSection.appendChild(article);
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleP1);
+  article.appendChild(articleP2);
+  article.appendChild(articleP3);
+  article.appendChild(expandButton);
+
+
+/* 
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
+*/
+  expandButton.addEventListener('click', function(event) {
+    article.classList.toggle('article-open')
+  })
 
+/* 
   Step 3: Don't forget to return something from your function!
+*/
 
+  return article; 
+} // closes articleMaker
+
+/* 
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
+*/
 
+data.forEach(function(item){
+  articleMaker(item);
+})
+
+/* 
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+// Check! 
